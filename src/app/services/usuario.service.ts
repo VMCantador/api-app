@@ -1,34 +1,50 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Usuario } from '../models/Usuario.model';
+import { EMPTY, Observable, catchError, map, retry } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
 
-  // Criar a variavel URL da API
+  //Criar a variavel com a URL da API
   private url = 'http://localhost:3000/usuarios';
 
-  // Criar uma lista da classe de Usuários
-  public listaUsuarios : Usuario[] = [];
+  //Criar uma lista da classe de Usuários
+  public listaUsuarios: Usuario[] = [];
 
-  // Criar uma instancia do HttpClient
+
+
+
+  //Criar uma instancia do HttpClient
   constructor(private http:HttpClient) { }
 
-  // MÉTODOS CRUD COM A API
+  // MÉTODOS DO CRUD COM A API
 
-  // Para o READ, teremos 2 métodos
+  //Para o Read, teremos 2 métodos
 
-  // 1º Busca todos os registros
-  public getAll(){
-    // Retorna a busca de dados na URL da API
-    return this.http.get(this.url);
+  // 1 busca todos os registros
+  public getAll(): Observable<Usuario[]>{
+    //Retorna a busca de dados na URL da API
+    return this.http.get<Usuario[]>(this.url).pipe(
+      map(retorno => retorno),
+      catchError(erro => this.exibirErro(erro))
+    );
   }
 
-  // 2º Busca 1 unico registro
-  public getOne(id:number){
-    return this.http.get(`${this.url}/${id}`);
+  // 2 busca 1 unico registro
+  public getOne(id:number): Observable<Usuario>{
+    return this.http.get<Usuario>(`${this.url}/${id}`).pipe(
+      map(retorno => retorno),
+      catchError(erro => this.exibirErro(erro))
+    );
   }
 
+  exibirErro(erro: any){
+    console.log(erro);
+    alert("A operação não pode ser concluida!");
+    return EMPTY;
+  }
 }
