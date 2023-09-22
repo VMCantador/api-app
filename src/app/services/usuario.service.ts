@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Usuario } from '../models/Usuario.model';
-import { EMPTY, Observable, catchError, map, retry } from 'rxjs';
+import { EMPTY, Observable, catchError, map } from 'rxjs';
 
 
 @Injectable({
@@ -46,5 +46,12 @@ export class UsuarioService {
     console.log(erro);
     alert("A operação não pode ser concluida!");
     return EMPTY;
+  }
+
+  salvar(usuario: Usuario): Observable<Usuario>{
+    return this.http.post<Usuario>(this.url, usuario).pipe(
+      map(retorno => retorno),
+      catchError(erro => this.exibirErro(erro))
+    );
   }
 }
