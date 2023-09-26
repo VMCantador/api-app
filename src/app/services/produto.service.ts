@@ -8,7 +8,7 @@ import { EMPTY, Observable, catchError, map } from 'rxjs';
 })
 export class ProdutoService {
 
-  private url = 'http://localhost:3000/usuarios';
+  private url = 'http://localhost:3000/produtos';
 
   public listaProdutos: Produto[] = [];
 

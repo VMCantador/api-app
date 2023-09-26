@@ -13,6 +13,8 @@ export class Tab2Page implements OnInit {
   produto?: Produto;
   id: number = 0;
   preco: number = 0;
+  descricao?: any;
+  validade: any;
 
   constructor(private prodService: ProdutoService) {}
 
