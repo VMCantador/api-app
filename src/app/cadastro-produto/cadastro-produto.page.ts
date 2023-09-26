@@ -1,6 +1,7 @@
 import { ProdutoService } from './../services/produto.service';
 import { Component, OnInit } from '@angular/core';
 import { Produto } from '../models/Produto.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro-produto',
@@ -17,7 +18,7 @@ export class CadastroProdutoPage implements OnInit {
     preco: 0
   };
 
-  constructor(private prodService: ProdutoService) { }
+  constructor(private prodService: ProdutoService, private router:Router) { }
 
   ngOnInit() {
   }
@@ -28,6 +29,10 @@ export class CadastroProdutoPage implements OnInit {
       alert("Produto: " + this.produto.id + " oi salvo!")
     });
     this.prodService.salvar(this.produto);
+  }
+
+  voltar() {
+    this.router.navigate(['/tabs/tab2']);
   }
 
 }

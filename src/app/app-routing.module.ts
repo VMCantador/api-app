@@ -9,9 +9,14 @@ const routes: Routes = [
   {
     path: 'cadastro-usuario',
     loadChildren: () => import('./cadastro-usuario/cadastro-usuario.module').then( m => m.CadastroUsuarioPageModule)
-  },  {
+  },
+  {
     path: 'cadastro-produto',
     loadChildren: () => import('./cadastro-produto/cadastro-produto.module').then( m => m.CadastroProdutoPageModule)
+  },
+  {
+    path: 'tabs',
+    loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
   }
 
 ];
