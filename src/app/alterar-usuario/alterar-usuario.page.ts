@@ -11,6 +11,9 @@ import { UsuarioService } from '../services/usuario.service';
 export class AlterarUsuarioPage implements OnInit {
 
   usuario!: Usuario;
+  novaSenha: string = '';
+  confirmarSenha: string = '';
+
   constructor(
     private activeRoute: ActivatedRoute,
     private userService: UsuarioService,
@@ -27,6 +30,23 @@ export class AlterarUsuarioPage implements OnInit {
       this.usuario = retorno;
       console.log(this.usuario);
     });
+  }
+
+  salvarUsuario(){
+
+    if(this.confirmarSenha.trim() && this.usuario.senha.trim()){
+      if(this.confirmarSenha == this.novaSenha){
+        this.usuario.senha = this.novaSenha;
+      }else{
+        alert("As senhas não são iguais!")
+      }
+    }
+    this.userService.alterar(this.usuario).subscribe(retorno => {
+      this.usuario = retorno;
+      alert("Usuário: " + this.usuario.id + " foi salvo!");
+      this.router.navigateByUrl("/");
+    });
+
   }
 
 }

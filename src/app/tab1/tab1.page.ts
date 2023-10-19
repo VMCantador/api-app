@@ -47,6 +47,10 @@ export class Tab1Page implements OnInit {
   }
 
   ngOnInit(): void {
+
+  }
+
+  ionViewWillEnter(){
     this.buscarUsuarios();
   }
 }
